@@ -1,0 +1,71 @@
+ETL STEP LOG — 02_cleaning.ipynb
+Run Date: 2026-04-20 18:48:15
+======================================================================
+
+STEP 1: Drop rows where 'Name' is null
+  Timestamp    : 2026-04-20 18:46:44
+  Rows Before  : 16719
+  Rows After   : 16717
+  Rows Removed : 2
+  Note         : Name is the primary record identifier — null names are unanalysable.
+
+STEP 2: Fix Year_of_Release — convert type, fill nulls, cap range [1980–2016]
+  Timestamp    : 2026-04-20 18:46:50
+  Rows Before  : 16717
+  Rows After   : 16713
+  Rows Removed : 4
+  Note         : Replaced 269 nulls with median year (2007). Removed years outside 1980–2016.
+
+STEP 3: Standardise text columns — strip whitespace, title case, normalise null strings
+  Timestamp    : 2026-04-20 18:46:59
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+  Note         : Applied to columns: ['Name', 'Genre', 'Publisher', 'Developer', 'Platform', 'Rating']
+
+STEP 4: Clean User_Score — replace 'tbd', convert to float, fill nulls with median
+  Timestamp    : 2026-04-20 18:47:08
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+  Note         : 'tbd' entries: 2424. Nulls filled with median (7.50).
+
+STEP 5: Fill nulls in Critic_Score, Critic_Count, User_Count with column medians
+  Timestamp    : 2026-04-20 18:47:14
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+
+STEP 6: Null sales set to 0; Global_Sales_Calculated added as sum of regional sales
+  Timestamp    : 2026-04-20 18:47:18
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+  Note         : Global_Sales_Calculated can be used to cross-validate original Global_Sales.
+
+STEP 7: Remove exact duplicate rows
+  Timestamp    : 2026-04-20 18:47:24
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+
+STEP 8: Cast columns to correct final data types
+  Timestamp    : 2026-04-20 18:47:29
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+  Note         : Critic_Count, User_Count → int; Scores → float; Year → int.
+
+STEP 9: Add derived columns: Sales_Region_Dominant, Score_Gap, Era
+  Timestamp    : 2026-04-20 18:47:36
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+  Note         : Feature engineering for EDA and Tableau dashboard use.
+
+STEP 10: Final null check and column reorder
+  Timestamp    : 2026-04-20 18:47:48
+  Rows Before  : 16713
+  Rows After   : 16713
+  Rows Removed : 0
+
